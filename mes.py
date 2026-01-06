@@ -1,0 +1,72 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
+import requests
+
+def random_quote():
+    r = requests.get("https://api.quotable.io/random", timeout=5)
+    if r.ok:
+        data = r.json()
+        return f"{data['content']} — {data['author']}"
+    return "Silence is also information."
+
+TOKEN = "8488696823:AAE-LDSGwuhynh-n-yb8WGGll3wmzicl-Vk"
+CHAT_ID = "269476468"
+
+
+# ===== Timezone =====
+tz = ZoneInfo("Asia/Jerusalem")
+now = datetime.now(tz)
+
+# ===== Reference times =====
+start_nov_26 = datetime(now.year - 1, 11, 26, 0, 0, tzinfo=tz)
+start_dec_22 = datetime(now.year - 1, 12, 22, 19, 0, tzinfo=tz)
+end_feb_5    = datetime(now.year, 2, 5, 17, 0, tzinfo=tz)
+
+# Progress bar period
+progress_start = datetime(now.year-1, 11, 26, 0, 0, tzinfo=tz)
+progress_end   = datetime(now.year, 3, 12, 0, 0, tzinfo=tz)
+
+# ===== Helpers =====
+def breakdown(delta):
+    days = delta.days
+    hours = delta.seconds // 3600
+    total_hours = int(delta.total_seconds() // 3600)
+    return f"{days}d {hours}h ({total_hours}h)"
+
+def progress_bar(now, start, end, width=20):
+    total = (end - start).total_seconds()
+    elapsed = (now - start).total_seconds()
+
+    ratio = min(max(elapsed / total, 0), 1)
+    filled = int(ratio * width)
+    bar = "█" * filled + "░" * (width - filled)
+
+    percent = int(ratio * 100)
+    return f"[{bar}] {percent}%"
+
+# ===== Message =====
+msg = (
+    f"⏱ Time update (IL)\n\n"
+    f"Since Nov 26 00:00: {breakdown(now - start_nov_26)}\n"
+    f"Since Dec 22 19:00: {breakdown(now - start_dec_22)}\n"
+    f"Until Feb 5 17:00: {breakdown(end_feb_5 - now)}\n\n"
+    f"Progress nov 26 → Mar 12:\n"
+    f"{progress_bar(now, progress_start, progress_end)}\n\n"
+    f"another hour pass, yayy😶"
+)
+try:
+    msg += f"\n\n🜂 {random_quote()}"
+except Exception as e:
+    print(e)
+
+
+# ===== Send =====
+try:
+    requests.post(
+        f"https://api.telegram.org/bot{TOKEN}/sendMessage",
+        data={"chat_id": CHAT_ID, "text": msg},
+        timeout=10
+    )
+except Exception:
+    pass
+
