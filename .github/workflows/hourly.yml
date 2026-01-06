@@ -1,0 +1,31 @@
+ame: Hourly time ping
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # כל שעה
+  workflow_dispatch:      
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install requests tzdata
+
+      - name: Run script
+        env:
+        run: |
+          python mes.py
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python time_ping.py
