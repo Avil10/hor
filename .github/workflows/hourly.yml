@@ -1,5 +1,4 @@
 name: Hourly time ping
-
 on:
   schedule:
     - cron: "*/5 * * * *"   # כל שעה
