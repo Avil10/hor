@@ -22,7 +22,6 @@ jobs:
           pip install requests tzdata
 
       - name: Run script
-        env:
         run: |
           python mes.py
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
