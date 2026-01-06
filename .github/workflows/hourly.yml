@@ -24,4 +24,3 @@ jobs:
       - name: Run script
         run: |
           python mes.py
-          
