@@ -1,4 +1,4 @@
-ame: Hourly time ping
+name: Hourly time ping
 
 on:
   schedule:
