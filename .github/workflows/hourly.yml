@@ -2,7 +2,7 @@ name: Hourly time ping
 on:
   push:
   schedule:
-    - cron: "*/5 * * * *"   # כל שעה
+    - cron: "0 * * * *"   # כל שעה
   workflow_dispatch:      
 jobs:
   run-script:
