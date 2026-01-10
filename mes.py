@@ -56,10 +56,6 @@ msg = (
     f"{progress_bar(now, progress_start, progress_end)}\n\n"
     f"another hour pass, yayy😶"
 )
-try:
-    msg += f"\n\n🜂 {random_quote()}"
-except Exception as e:
-    print(e)
 
 
 # ===== Send =====
@@ -71,5 +67,6 @@ try:
     )
 except Exception:
     pass
+
 
 
