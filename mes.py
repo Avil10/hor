@@ -50,7 +50,9 @@ msg = (
     f"Since Nov 26 00:00: {breakdown(now - start_nov_26)}\n"
     f"Since Dec 22 19:00: {breakdown(now - start_dec_22)}\n"
     f"Until Feb 5 17:00: {breakdown(end_feb_5 - now)}\n\n"
-    f"Progress nov 26 → Mar 12:\n"
+    ff"Progress Dec 22 → Feb 5:\n"
+    f"{progress_bar(now, start_dec_22, end_feb_5)}\n\n"
+    f"Progress Nov 26 → Mar 12:\n"
     f"{progress_bar(now, progress_start, progress_end)}\n\n"
     f"another hour pass, yayy😶"
 )
@@ -69,4 +71,5 @@ try:
     )
 except Exception:
     pass
+
 
