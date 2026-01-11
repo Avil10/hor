@@ -45,22 +45,22 @@ def progress_bar(now, start, end, width=20):
     return f"[{bar}] {percent}%"
     
 def smooth_bar_4(now, start, end, width=20):
-    levels = [" ", "░", "▒", "▓", "█"] # 0..3
+    blocks = [" ", "▏", "▎", "▍", "▌", "▋", "▊", "▉", "█"]
 
     total = (end - start).total_seconds()
     elapsed = max(0, min((now - start).total_seconds(), total))
     ratio = elapsed / total
 
-    units = ratio * width
-    full = int(units)
-    rem = units - full
-    sub = int(rem * 5)  # 0..3
+    full_units = ratio * width
+    full_blocks = int(full_units)
+    remainder = full_units - full_blocks
+    sub_block = int(remainder * 8)
 
-    # build
-    bar = "█" * full
-    if full < width:
-        bar += levels[sub]  # partial cell
-        bar += "-" * (width - full - 1)
+    bar = (
+        "█" * full_blocks +
+        (blocks[sub_block] if full_blocks < width else "") +
+        " " * (width - full_blocks - 1)
+    )
 
     percent = int(ratio * 100)
     return f"[{bar}] {percent}%"
@@ -88,6 +88,7 @@ try:
     )
 except Exception:
     pass
+
 
 
 
