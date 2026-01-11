@@ -60,7 +60,7 @@ def smooth_bar_4(now, start, end, width=20):
     bar = "█" * full
     if full < width:
         bar += levels[sub]  # partial cell
-        bar += "░" * (width - full - 1)
+        bar += "-" * (width - full - 1)
 
     percent = int(ratio * 100)
     return f"[{bar}] {percent}%"
@@ -88,6 +88,7 @@ try:
     )
 except Exception:
     pass
+
 
 
 
