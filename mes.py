@@ -54,7 +54,7 @@ def smooth_bar_4(now, start, end, width=20):
     units = ratio * width
     full = int(units)
     rem = units - full
-    sub = int(rem * 4)  # 0..3
+    sub = int(rem * 5)  # 0..3
 
     # build
     bar = "█" * full
@@ -63,7 +63,7 @@ def smooth_bar_4(now, start, end, width=20):
         bar += "░" * (width - full - 1)
 
     percent = int(ratio * 100)
-    return f"[{bar}] {percent}% \n {sub}"
+    return f"[{bar}] {percent}%"
 
 # ===== Message =====
 msg = (
@@ -88,6 +88,7 @@ try:
     )
 except Exception:
     pass
+
 
 
 
