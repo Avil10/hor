@@ -63,7 +63,7 @@ def smooth_bar_4(now, start, end, width=20):
         bar += "░" * (width - full - 1)
 
     percent = int(ratio * 100)
-    return f"[{bar}] {percent}%"
+    return f"[{bar}] {percent}% \n {sub}"
 
 # ===== Message =====
 msg = (
@@ -88,6 +88,7 @@ try:
     )
 except Exception:
     pass
+
 
 
 
