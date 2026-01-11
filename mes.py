@@ -45,7 +45,7 @@ def progress_bar(now, start, end, width=20):
     return f"[{bar}] {percent}%"
     
 def smooth_bar_4(now, start, end, width=20):
-    levels = ["░", "▒", "▓", "█"]  # 0..3
+    levels = [" ", "░", "▒", "▓", "█"] # 0..3
 
     total = (end - start).total_seconds()
     elapsed = max(0, min((now - start).total_seconds(), total))
@@ -88,6 +88,7 @@ try:
     )
 except Exception:
     pass
+
 
 
 
