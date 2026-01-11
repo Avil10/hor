@@ -59,7 +59,7 @@ def smooth_bar_4(now, start, end, width=20):
     bar = (
         "█" * full_blocks +
         (blocks[sub_block] if full_blocks < width else "") +
-        " " * (width - full_blocks - 1)
+        "░" * (width - full_blocks - 1)
     )
 
     percent = int(ratio * 100)
@@ -88,6 +88,7 @@ try:
     )
 except Exception:
     pass
+
 
 
 
